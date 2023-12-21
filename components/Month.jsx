@@ -5,10 +5,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
   },
   montText: {
-    fontSize: 24,
+    fontSize: 34,
   },
   monthTextNotSelected: {
-    color: "gray",
+    color: "#c4c4c4",
   },
   monthTextSelected: {
     color: "black",
