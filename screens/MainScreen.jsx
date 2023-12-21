@@ -1,11 +1,17 @@
-import { View, Text, Button } from "react-native";
+import { View } from "react-native";
 import MonthPicker from "../components/MonthPicker";
+import { useState } from "react";
 
-const MainScreen = ({navigation}) => {
+const MainScreen = () => {
+  const [monthSelected,setMonthSelected] = useState(0); 
+
+  const selectedMonth = (month) =>{
+    setMonthSelected(month);
+  };
+
   return (
     <View>
-      <MonthPicker />
-      <Text>Pantalla principal</Text>
+      <MonthPicker monthSelected={monthSelected} handleChange={selectedMonth}/>
     </View>
   );
 };
