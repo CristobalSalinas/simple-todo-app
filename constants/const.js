@@ -49,3 +49,5 @@ export const monthList = [
   },
 
 ];
+
+export const weekDays = ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'];

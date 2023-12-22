@@ -1,9 +1,29 @@
-import { View, Text } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from "react-native";
+import Day from "./Day";
 
-export default DayPicker = () =>{
-    return(
-        <View>
-            <Text>Day Picker</Text>
-        </View>
-    );
+const styles = StyleSheet.create({
+  container:{
+    backgroundColor:"white",
+    paddingTop:10,
+    paddingBottom:20,
+  }
+});
+
+export default DayPicker = ({ days, selectedDay }) => {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={days}
+        horizontal={true}
+        renderItem={({ item }) => (
+          <Day
+            day={item.day}
+            number={item.num}
+            selected={selectedDay === item.num}
+          />
+        )}
+        keyExtractor={(item) => item.num}
+      />
+    </View>
+  );
 };

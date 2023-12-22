@@ -1,6 +1,9 @@
 import { View, Text } from "react-native";
 import MonthPicker from "../components/MonthPicker";
+import Day from "../components/Day";
 import { useMemo, useState, useEffect } from "react";
+import { weekDays } from "../constants/const";
+import DayPicker from "../components/DayPicker";
 
 const MainScreen = () => {
   const [date,setDate] = useState(null);
@@ -24,21 +27,23 @@ const MainScreen = () => {
 
   const monthDays = useMemo(()=>{
     const monthTotalDays = new Date(date?.year, date?.month + 1, 0).getDate();
-    const firstDayOfTheMonth = new Date(date?.year, date?.month, 1);
 
-    console.log(firstDayOfTheMonth);
+    const days = [];
 
     for (let i = 1; i <= monthTotalDays; i++) {
-      console.log(firstDayOfTheMonth + 1 - 1);
+      const dateByDay = new Date(date?.year, date?.month, i);
+      const weekDay = weekDays[dateByDay.getDay()];
+      const dayNumber = i;
+      days.push({num:dayNumber,day:weekDay})
     }
 
-    return monthTotalDays;
+    return days;
   },[date]);
 
   return (
     <View>
       <MonthPicker monthSelected={date?.month} handleChange={selectedMonth}/>
-      <Text>monthDays: {monthDays}</Text>
+      <DayPicker days={monthDays} selectedDay={date?.day}/>
     </View>
   );
 };
