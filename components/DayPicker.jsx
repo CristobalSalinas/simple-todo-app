@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DayPicker = ({ days, selectedDay }) => {
+export default DayPicker = ({ days, selectedDay, handleChange }) => {
   return (
     <View style={styles.container}>
       <FlatList
@@ -20,6 +20,7 @@ export default DayPicker = ({ days, selectedDay }) => {
             day={item.day}
             number={item.num}
             selected={selectedDay === item.num}
+            handleChange={handleChange}
           />
         )}
         keyExtractor={(item) => item.num}

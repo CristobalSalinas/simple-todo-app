@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 const styles = StyleSheet.create({
   dayContainer:{
@@ -14,11 +14,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Day = ({number,day, selected}) => {
+export default Day = ({number,day, selected, handleChange}) => {
+
+  const changeDay = () =>{
+    handleChange(number);
+  };
+
   return (
-    <View style={[styles.dayContainer,selected && {backgroundColor:'black'}]}>
-      <Text style={[styles.textColor,selected && {color:'white'}]}>{day}</Text>
-      <Text style={[styles.textColor,selected && {color:'white'}]}>{number}</Text>
-    </View>
+    <TouchableOpacity onPress={changeDay}>
+      <View style={[styles.dayContainer,selected && {backgroundColor:'black'}]}>
+        <Text style={[styles.textColor,selected && {color:'white'}]}>{day}</Text>
+        <Text style={[styles.textColor,selected && {color:'white'}]}>{number}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };

@@ -25,6 +25,10 @@ const MainScreen = () => {
     setDate({...date,month:month});
   };
 
+  const selectDay = (day) =>{
+    setDate({...date,day:day});
+  }
+
   const monthDays = useMemo(()=>{
     const monthTotalDays = new Date(date?.year, date?.month + 1, 0).getDate();
 
@@ -43,7 +47,7 @@ const MainScreen = () => {
   return (
     <View>
       <MonthPicker monthSelected={date?.month} handleChange={selectedMonth}/>
-      <DayPicker days={monthDays} selectedDay={date?.day}/>
+      <DayPicker days={monthDays} selectedDay={date?.day} handleChange={selectDay}/>
     </View>
   );
 };
