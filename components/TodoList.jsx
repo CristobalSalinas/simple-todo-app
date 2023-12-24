@@ -14,7 +14,21 @@ const styles = StyleSheet.create({
 export default TodoList = () => {
   return (
     <View style={styles.list}>
-      <TodoItem />
+      <TodoItem 
+        title="Probando"
+        description="Esta descripcion"
+        date="9:30 PM"
+        />
+      <TodoItem 
+        title="Probando"
+        description="Esta descripcion"
+        date="9:30 PM"
+        />
+      <TodoItem 
+        title="Probando"
+        description="Esta descripcion"
+        date="9:30 PM"
+        />
     </View>
   );
 };

@@ -5,13 +5,13 @@ const styles = StyleSheet.create({
     container:{
         flexDirection:"row",
         justifyContent:"space-between",
-        flexWrap:"wrap"
+        flexWrap:"wrap",
+        marginBottom:30
     },  
     check:{
         borderRadius:50,
         width:30,
         height:30,
-        backgroundColor:"white",
         marginRight:20
     },
     info:{
@@ -22,15 +22,15 @@ const styles = StyleSheet.create({
     }
 });
 
-export default TodoItem = () =>{
+export default TodoItem = ({checked = false, title, description, date}) =>{
     return(
         <View style={styles.container}>
-            <View style={styles.check}/>
+            <View style={[styles.check, {backgroundColor : checked ? "green" : "white"}]}/>
             <View style={styles.info}>
-                <StyledText medium bold>Terminar este proyecto</StyledText>
-                <StyledText>Tengo que terminar esto</StyledText>
+                <StyledText medium bold>{title}</StyledText>
+                <StyledText>{description}</StyledText>
             </View>
-            <StyledText style={styles.date}>9:30 PM</StyledText>
+            <StyledText style={styles.date}>{date}</StyledText>
         </View>
     );
 };
