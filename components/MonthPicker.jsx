@@ -4,18 +4,24 @@ import Month from "./Month";
 import { useEffect, useRef } from "react";
 
 const styles = StyleSheet.create({
-  container: {
-    height: 100,
+  parent:{
     backgroundColor: "#fff",
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
-    paddingLeft: 10,
-    paddingBottom: 10,
+    flexDirection:"row",
+    height:65,
+  },  
+  monthContainer: {
+    flex:0.95,
   },
   flatlistContainer: {
     height: 50,
     textAlign: "left",
   },
+  styledContainer:{
+    backgroundColor:'black',
+      borderTopLeftRadius:15,
+      flex:0.05,
+
+  }
 });
 
 export default MonthPicker = ({monthSelected, handleChange}) => {
@@ -31,23 +37,27 @@ export default MonthPicker = ({monthSelected, handleChange}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.flatlistContainer}>
-        <FlatList
-          ref={flatListRef}
-          horizontal={true}
-          data={monthList}
-          renderItem={({ item }) => <Month title={item.title} selected={monthSelected === item.monthNum } handleChange={changeMonth} monthNumber={item.monthNum}/>}
-          keyExtractor={(item) => item.monthNum}
-          initialScrollIndex={monthSelected}
-          onScrollToIndexFailed={info => {
-            const wait = new Promise(resolve => setTimeout(resolve, 500));
-            wait.then(() => {
-              scrollFlatListToIndex(info.index);
-            });
-          }}
-        />
+    <View style={styles.parent}>
+      <View style={styles.monthContainer}>
+        <View style={styles.flatlistContainer}>
+          <FlatList
+            ref={flatListRef}
+            horizontal={true}
+            data={monthList}
+            renderItem={({ item }) => <Month title={item.title} selected={monthSelected === item.monthNum } handleChange={changeMonth} monthNumber={item.monthNum}/>}
+            keyExtractor={(item) => item.monthNum}
+            initialScrollIndex={monthSelected}
+            onScrollToIndexFailed={info => {
+              const wait = new Promise(resolve => setTimeout(resolve, 500));
+              wait.then(() => {
+                scrollFlatListToIndex(info.index);
+              });
+            }}
+          />
+        </View>
       </View>
+      <View style={styles.styledContainer}/>
     </View>
+
   );
 };

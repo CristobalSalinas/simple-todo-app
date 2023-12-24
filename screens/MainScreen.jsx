@@ -4,6 +4,7 @@ import Day from "../components/Day";
 import { useMemo, useState, useEffect } from "react";
 import { weekDays } from "../constants/const";
 import DayPicker from "../components/DayPicker";
+import TodoList from "../components/TodoList";
 
 const MainScreen = () => {
   const [date,setDate] = useState(null);
@@ -29,36 +30,26 @@ const MainScreen = () => {
     setDate({...date,day:day});
   }
 
-  // const monthDays = useMemo(()=>{
-  //   const monthTotalDays = new Date(date?.year, date?.month + 1, 0).getDate();
+  const monthDays = useMemo(()=>{
+    const monthTotalDays = new Date(date?.year, date?.month + 1, 0).getDate();
 
-  //   const days = [];
+    const days = [];
 
-  //   for (let i = 1; i <= monthTotalDays; i++) {
-  //     const dateByDay = new Date(date?.year, date?.month, i);
-  //     const weekDay = weekDays[dateByDay.getDay()];
-  //     const dayNumber = i;
-  //     days.push({num:dayNumber,day:weekDay})
-  //   }
+    for (let i = 1; i <= monthTotalDays; i++) {
+      const dateByDay = new Date(date?.year, date?.month, i);
+      const weekDay = weekDays[dateByDay.getDay()];
+      const dayNumber = i;
+      days.push({num:dayNumber,day:weekDay})
+    }
 
-  //   return days;
-  // },[date]);
-
-  const monthTotalDays = new Date(date?.year, date?.month + 1, 0).getDate();
-
-  const monthDaysdays = [];
-
-  for (let i = 1; i <= monthTotalDays; i++) {
-    const dateByDay = new Date(date?.year, date?.month, i);
-    const weekDay = weekDays[dateByDay.getDay()];
-    const dayNumber = i;
-    monthDaysdays.push({num:dayNumber,day:weekDay})
-  }
+    return days;
+  },[date]);
 
   return (
-    <View>
+    <View style={{flex:1,backgroundColor:'white'}}>
       <MonthPicker monthSelected={date?.month} handleChange={selectedMonth}/>
-      <DayPicker days={monthDaysdays} selectedDay={date?.day} handleChange={selectDay}/>
+      <DayPicker days={monthDays} selectedDay={date?.day} handleChange={selectDay}/>
+      <TodoList />
     </View>
   );
 };
