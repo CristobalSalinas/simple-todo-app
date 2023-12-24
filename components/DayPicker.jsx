@@ -1,5 +1,6 @@
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import Day from "./Day";
+import { useEffect, useRef } from "react";
 
 const styles = StyleSheet.create({
   container:{
@@ -10,9 +11,27 @@ const styles = StyleSheet.create({
 });
 
 export default DayPicker = ({ days, selectedDay, handleChange }) => {
+
+  const flatListRef = useRef(null);
+
+  const changeDay = (dayNum) =>{
+    handleChange(dayNum);
+  };
+
+  useEffect(()=>{
+    if(selectedDay != undefined){
+      scrollToIndex(selectedDay -1);
+    }
+  },[selectedDay]);
+
+  const scrollToIndex = (index) =>{
+    flatListRef.current?.scrollToIndex({ index: index, animated: true });
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
+        ref={flatListRef}
         data={days}
         horizontal={true}
         renderItem={({ item }) => (
@@ -20,10 +39,16 @@ export default DayPicker = ({ days, selectedDay, handleChange }) => {
             day={item.day}
             number={item.num}
             selected={selectedDay === item.num}
-            handleChange={handleChange}
+            handleChange={changeDay}
           />
         )}
         keyExtractor={(item) => item.num}
+        onScrollToIndexFailed={info => {
+          const wait = new Promise(resolve => setTimeout(resolve, 500));
+          wait.then(() => {
+            scrollToIndex(info.index);
+          });
+        }}
       />
     </View>
   );
