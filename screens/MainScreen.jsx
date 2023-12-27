@@ -48,7 +48,7 @@ const MainScreen = () => {
     <View style={{flex:1,backgroundColor:'white'}}>
       <MonthPicker monthSelected={date?.month} handleChange={selectedMonth}/>
       <DayPicker days={monthDays} selectedDay={date?.day} handleChange={selectDay}/>
-      <TodoList />
+      <TodoList date={date}/>
     </View>
   );
 };
