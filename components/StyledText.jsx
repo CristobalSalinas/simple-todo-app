@@ -20,12 +20,15 @@ const styles = StyleSheet.create({
     black:{
         color:'black',
     },
+    green:{
+        color:'#06781d',
+    },
     line:{
-        textDecorationLine:"line-through"
+        textDecorationLine:"line-through",
     }
 });
 
-const StyledText = ({children,bold,medium,big,white,black,line}) =>{
+const StyledText = ({children,bold,medium,big,white,black,line,green}) =>{
 
     const textStyles = [
         styles.text,
@@ -35,6 +38,7 @@ const StyledText = ({children,bold,medium,big,white,black,line}) =>{
         white && styles.white,
         black && styles.black,
         line && styles.line,
+        green && styles.green,
     ];
 
     return(

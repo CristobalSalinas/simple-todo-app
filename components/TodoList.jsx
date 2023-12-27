@@ -1,6 +1,7 @@
-import { StyleSheet, View, Text } from "react-native";
-import StyledText from "./StyledText";
+import { StyleSheet, View, Text, FlatList } from "react-native";
 import TodoItem from "./TodoItem";
+import todos from '../data/todos';
+import { useState } from "react";
 
 const styles = StyleSheet.create({
   list:{
@@ -12,22 +13,23 @@ const styles = StyleSheet.create({
 });
 
 export default TodoList = () => {
+  const [todosList,setTodosList] = useState(todos);
+
+  const changeTodoStatus = (id) =>{
+    let todo = todosList.find(x=>x.id === id);
+    todo.checked = !todo.checked;
+    setTodosList([
+      ...todosList,
+      todo,
+    ]);
+  }
+
   return (
     <View style={styles.list}>
-      <TodoItem 
-        title="Probando"
-        description="Esta descripcion"
-        date="9:30 PM"
-        />
-      <TodoItem 
-        title="Probando"
-        description="Esta descripcion"
-        date="9:30 PM"
-        />
-      <TodoItem 
-        title="Probando"
-        description="Esta descripcion"
-        date="9:30 PM"
+      <FlatList 
+        data={todos}
+        renderItem={({item})=><TodoItem id={item.id} title={item.title} description={item.description} checked={item.checked} changeStatus={changeTodoStatus}/>}
+        keyExtractor={(item)=>item.id}
         />
     </View>
   );
