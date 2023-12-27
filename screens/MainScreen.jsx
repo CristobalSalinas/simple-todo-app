@@ -1,6 +1,5 @@
 import { View, Text } from "react-native";
 import MonthPicker from "../components/MonthPicker";
-import Day from "../components/Day";
 import { useMemo, useState, useEffect } from "react";
 import { weekDays } from "../constants/const";
 import DayPicker from "../components/DayPicker";
