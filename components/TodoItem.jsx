@@ -28,21 +28,21 @@ const styles = StyleSheet.create({
     }
 });
 
-export default TodoItem = ({checked = false, id, title, description, changeStatus}) =>{
+export default TodoItem = ({id, title, description, completed, updateTodo}) =>{
 
-    const changeStatusChecked = () =>{
-        changeStatus(id);
+    const changeTodoStatus = () =>{
+        updateTodo(id,!completed);
     }
 
     return(
-        <TouchableOpacity onPress={changeStatusChecked}>
+        <TouchableOpacity onPress={changeTodoStatus}>
             <View style={styles.container}>
                 <View style={styles.check}>
-                    {checked && <AntDesign name="check" size={15} color="black"/>}
+                    {completed && <AntDesign name="check" size={15} color="black"/>}
                 </View>
                 <View style={styles.info}>
-                    <StyledText medium bold line={checked ? true : undefined} green={checked ? true : undefined}>{title}</StyledText>
-                    <StyledText line={checked ? true : undefined} green={checked ? true : undefined}>{description}</StyledText>
+                    <StyledText medium bold line={completed ? true : undefined} green={completed ? true : undefined}>{title}</StyledText>
+                    <StyledText line={completed ? true : undefined} green={completed ? true : undefined}>{description}</StyledText>
                 </View>
             </View>
         </TouchableOpacity>
